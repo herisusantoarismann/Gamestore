@@ -610,7 +610,7 @@ class Dashboard extends React.Component {
                                         <div class="row mt-3">
                                             <div class="col-md-12">
                                                 <label class="labels">
-                                                    {this.state.developer_id}
+                                                    Developer Name
                                                 </label>
                                                 <select
                                                     class="form-select"

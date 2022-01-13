@@ -106,7 +106,7 @@ class Checkout extends React.Component {
                                                                 <div class="col-md-3">
                                                                     <img
                                                                         class="img-fluid mx-auto d-block image"
-                                                                        src="/images/bf.jpg"
+                                                                        src={`/images/${groupedData[item][0].picture}`}
                                                                         style={{
                                                                             height: "160px",
                                                                             width: "160px",

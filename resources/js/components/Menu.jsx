@@ -16,7 +16,7 @@ class Navbar extends React.Component {
             <>
                 <div className="fixed-bottom text-right mr-4 mb-4">
                     <img
-                        src="/images/bf.jpg"
+                        src="/images/pp.jpg"
                         alt="profile"
                         className="rounded-circle dropdown-toggle icon-login"
                         data-toggle="dropdown"

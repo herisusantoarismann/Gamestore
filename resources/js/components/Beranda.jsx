@@ -102,7 +102,7 @@ class Home extends React.Component {
                                 <div class="card" key={item.game_id}>
                                     <img
                                         class="card-img-top"
-                                        src={CoD}
+                                        src={`/images/${item.picture}`}
                                         alt="Card image cap"
                                         style={{ height: "18rem" }}
                                     />

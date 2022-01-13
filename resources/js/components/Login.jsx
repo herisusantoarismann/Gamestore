@@ -9,6 +9,7 @@ import { increment, decrement, addUser } from "../redux/action";
 import "../../css/app.css";
 import ReCAPTCHA from "react-google-recaptcha";
 import siteKey from "./Captcha";
+const recaptchaRef = React.createRef();
 
 class Login extends React.Component {
     constructor(props) {
@@ -33,30 +34,37 @@ class Login extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const cookies = new Cookies();
+        const recaptchaValue = recaptchaRef.current.getValue();
+        if (recaptchaValue) {
+            const cookies = new Cookies();
 
-        axios
-            .post("/login", {
-                email: this.state.email,
-                password: this.state.password,
-            })
-            .then((res) => {
-                if (res.status === 200) {
+            axios
+                .post("/login", {
+                    email: this.state.email,
+                    password: this.state.password,
+                })
+                .then((res) => {
+                    if (res.status === 200) {
+                        this.setState({
+                            isLogin: true,
+                        });
+                        window.sessionStorage.setItem("isLogin", true);
+                        const addUser = this.props.addUser;
+                        addUser(res.data.data);
+                        cookies.set("user", res.data.data);
+                    }
+                })
+                .catch((err) => {
                     this.setState({
-                        isLogin: true,
+                        errors: true,
                     });
-                    window.sessionStorage.setItem("isLogin", true);
-                    const addUser = this.props.addUser;
-                    addUser(res.data.data);
-                    cookies.set("user", res.data.data);
-                }
-            })
-            .catch((err) => {
-                this.setState({
-                    errors: true,
+                    console.log(err.response);
                 });
-                console.log(err.response);
+        } else {
+            this.setState({
+                errors: true,
             });
+        }
     };
 
     render() {
@@ -133,7 +141,10 @@ class Login extends React.Component {
                                         />
                                     </div>
                                     <div class="form-group mb-4">
-                                        <ReCAPTCHA sitekey={siteKey} />
+                                        <ReCAPTCHA
+                                            sitekey={siteKey}
+                                            ref={recaptchaRef}
+                                        />
                                     </div>
                                     <input
                                         name="login"

@@ -234,16 +234,6 @@ class Order extends React.Component {
                                                         Export
                                                     </button>
                                                 </a>
-                                                <button
-                                                    onClick={() =>
-                                                        this.setState({
-                                                            toast: !this.state
-                                                                .toast,
-                                                        })
-                                                    }
-                                                >
-                                                    TOAST
-                                                </button>
                                             </div>
                                             <form className="form-inline mb-2 my-lg-0 float-right">
                                                 <input
